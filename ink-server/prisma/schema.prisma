@@ -1,0 +1,43 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String    @id @default(uuid())
+  email     String    @unique
+  name      String
+  password  String?
+  avatar    String?
+  provider  String    @default("local")
+  googleId  String?   @unique
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  boards    Board[]
+  messages  Message[]
+}
+
+model Board {
+  id        String    @id @default(uuid())
+  roomId    String    @unique
+  name      String    @default("Untitled Board")
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  createdBy String
+  user      User      @relation(fields: [createdBy], references: [id], onDelete: Cascade)
+  messages  Message[]
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  text      String
+  roomId    String
+  userId    String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  board     Board    @relation(fields: [roomId], references: [roomId], onDelete: Cascade)
+}
