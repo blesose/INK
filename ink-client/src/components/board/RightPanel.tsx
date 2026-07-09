@@ -9,7 +9,8 @@ interface Person {
   id: string
   name: string
   color: string
-  avatar: string
+  avatar: string | null
+
 }
 
 interface Props {

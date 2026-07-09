@@ -36,25 +36,23 @@ export default function Register() {
   }
 
   const handleGoogle = useGoogleLogin({
-    flow: 'implicit',
-    ux_mode: 'redirect',
-    redirect_uri: window.location.origin,
-    onSuccess: async (tokenResponse) => {
-      setGoogleLoading(true)
-      setError('')
-      try {
-        await googleAuth(tokenResponse.access_token)
-        navigate('/dashboard')
-        toast.success('Welcome to INK!')
-      } catch (err: any) {
-        setError(err.response?.data?.error || 'Google sign-in failed. Please try again.')
-      } finally {
-        setGoogleLoading(false)
-      }
-    },
-    onError: () => setError('Google sign-in was cancelled or failed.')
-  })
+  flow: 'auth-code',
+  onSuccess: async (codeResponse) => {
+    setGoogleLoading(true)
+    setError('')
 
+    try {
+      await googleAuth(codeResponse.code)
+      navigate('/dashboard')
+      toast.success('Welcome to INK!')
+    } catch (err: any) {
+      setError(err.response?.data?.error || 'Google sign-in failed. Please try again.')
+    } finally {
+      setGoogleLoading(false)
+    }
+  },
+  onError: () => setError('Google sign-in was cancelled or failed.')
+})
   return (
     <div className={`min-h-screen flex flex-col ${dark ? 'bg-[#05050a] text-white' : 'bg-[#f8f8fc] text-[#0a0a0f]'} transition-colors duration-300 relative overflow-hidden`}>
       <div className="grid-bg absolute inset-0" />

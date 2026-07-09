@@ -1,4 +1,5 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
+import type { ReactNode } from 'react'
 import toast from 'react-hot-toast'
 import type { User } from '../types/index'
 import api from '../lib/api'

@@ -21,7 +21,12 @@ interface DrawData {
   brushSize: number
   tool: 'pen' | 'eraser' | 'line' | 'rectangle' | 'circle'
 }
-interface Person { id: string; name: string; color: string; avatar: string | null }
+interface Person { 
+  id: string; 
+  name: string; 
+  color: string; 
+  avatar: string | null
+ }
 
 const NOTE_COLORS = ['#fef08a', '#86efac', '#93c5fd', '#f9a8d4', '#fdba74', '#c4b5fd']
 
@@ -316,6 +321,7 @@ export default function Board() {
     const overlayCtx = getOverlayCtx()
     const overlay = overlayRef.current
     if (!overlayCtx || !overlay) return
+    if (tool === 'select') return
     overlayCtx.clearRect(0, 0, overlay.width, overlay.height)
     const data: DrawData = { from: startPoint.current, to: cur, color, brushSize, tool }
     if (tool === 'line') drawLine(overlayCtx, data)

@@ -1,14 +1,13 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Pencil, Mail, Lock, ArrowRight } from 'lucide-react'
+import { Pencil, ArrowRight } from 'lucide-react'
 import { useGoogleLogin } from '@react-oauth/google'
 import { FcGoogle } from 'react-icons/fc'
 import toast from 'react-hot-toast'
 import { useAuth } from '../context/AuthContext'
 import { useTheme } from '../context/ThemeContext'
 import ThemeToggle from '../components/ThemeToggle'
-import api from '../lib/api'
 
 export default function Login() {
   const navigate = useNavigate()
@@ -20,16 +19,6 @@ export default function Login() {
   const [loading, setLoading] = useState(false)
   const [googleLoading, setGoogleLoading] = useState(false)
 
-  const openNewBoard = async () => {
-  try {
-    const res = await api.post('/api/boards', { name: 'Untitled Board' })
-    navigate(`/board/${res.data.board.roomId}`)
-  } catch (err) {
-    console.error('Board creation after login failed:', err)
-    toast.error('Signed in, but could not create a board.')
-    navigate('/dashboard')
-  }
-}
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
