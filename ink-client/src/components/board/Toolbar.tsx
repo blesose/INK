@@ -120,11 +120,16 @@ export default function Toolbar({
           <button
             key={c}
             onClick={() => onColorChange(c)}
-            className={`w-4 h-4 rounded-full transition-all hover:scale-110 ${color === c ? 'ring-2 ring-violet-400 ring-offset-1' : ''}`}
+            className={`w-4 h-4 rounded-full transition-all hover:scale-110 ${
+  color === c
+    ? dark
+      ? 'ring-2 ring-violet-400 ring-offset-2 ring-offset-[#0f0f17]'
+      : 'ring-2 ring-violet-400 ring-offset-2 ring-offset-white'
+    : ''
+}`}
             style={{
               background: c,
               border: c === '#ffffff' ? '1px solid rgba(0,0,0,0.2)' : undefined,
-              ringOffsetColor: dark ? '#0f0f17' : '#ffffff'
             }}
           />
         ))}
