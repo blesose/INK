@@ -22,7 +22,7 @@ I wanted to challenge myself by building a real-time application from the ground
 INK gave me the opportunity to work with technologies such as Socket.IO, Prisma, PostgreSQL, JWT authentication, and Google OAuth while solving problems around real-time synchronization, collaborative user experiences, and full-stack architecture.
 
 Beyond learning the technologies themselves, the goal was to build a project that reflects how modern collaborative applications work in production.
-
+## Live Demo : https://ink-psi-livid.vercel.app
 ## 🚀 Features
 
 ### 🎨 Real-Time Drawing
